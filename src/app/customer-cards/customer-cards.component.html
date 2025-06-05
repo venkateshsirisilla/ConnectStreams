@@ -1,0 +1,8 @@
+<h3>Customer Details</h3>
+<div class="cards-container">
+  <div class="card" *ngFor="let customer of customers()">
+    <h4>{{ customer.name }}</h4>
+    <p>Email: {{ customer.email }}</p>
+    <p>Phone: {{ customer.phone }}</p>
+  </div>
+</div>
