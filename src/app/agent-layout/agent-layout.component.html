@@ -1,8 +1,12 @@
 <div class="workspace-container">
-  <div class="left-panel">
-    <app-ccp-container></app-ccp-container>
+  <div class="left-panel" >
+    <app-ccp-container *ngIf="showLeft" (loaded)="onLeftLoaded()"></app-ccp-container>
   </div>
-  <div class="right-panel">
-    <app-customer-cards></app-customer-cards>
+  <div class="right-panel" >
+    <app-customer-cards *ngIf="showRight"></app-customer-cards>
+    
   </div>
+  <!-- <div class="right-panel">
+        <button class="btn btn-success" (click)="navigateToDifferentPage()">Add</button>
+    </div> -->
 </div>

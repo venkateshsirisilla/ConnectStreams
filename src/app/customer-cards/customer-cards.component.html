@@ -1,8 +1,33 @@
-<h3>Customer Details</h3>
+<!-- <h3>Customer Details</h3>
 <div class="cards-container">
   <div class="card" *ngFor="let customer of customers()">
     <h4>{{ customer.name }}</h4>
     <p>Email: {{ customer.email }}</p>
     <p>Phone: {{ customer.phone }}</p>
   </div>
+</div> -->
+<p *ngIf="contactIdState!=null; else noContact">
+Contact ID: {{ contactIdState.contactId }}
+</p>
+
+<div class="info-panel" style="margin-top: 20px;">
+  <h3>Agent Info</h3>
+  <p *ngIf="agentState!=null; else noAgent">
+    Name: {{ agentState.name }}<br />
+    Online: {{ agentState.isOnline }}<br />
+    Routing Profile: {{ agentState.routingProfile?.name || 'N/A' }}
+  </p>
+  <ng-template #noAgent>
+    <p>Agent not logged in</p>
+  </ng-template>
+
+  <h3>Current Contact</h3>
+  <p *ngIf="contactState!=null; else noContact">
+    Contact ID: {{ contactState.contactId }}<br />
+    State: {{ contactState.state }}<br />
+    Type: {{ contactState.type }}
+  </p>
+  <ng-template #noContact>
+    <p>No active contact</p>
+  </ng-template>
 </div>
