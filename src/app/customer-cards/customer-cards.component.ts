@@ -1,14 +1,15 @@
 import { AfterViewInit, Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { CcpContainerComponent } from '../ccp-container/ccp-container.component';
 import { AgentState, ConnectServiceService, ContactState } from '../connectService/connect-service.service';
 import { Subscription } from 'rxjs';
+import { ContactDetailsComponent } from '../contact-details/contact-details.component';
 // import * as connect from 'amazon-connect-streams'; const window: any;
 @Component({
   selector: 'app-customer-cards',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf,ContactDetailsComponent],
   templateUrl: './customer-cards.component.html',
   styleUrls: ['./customer-cards.component.scss']
 })
@@ -38,9 +39,9 @@ export class CustomerCardsComponent implements OnInit {
       }),
       this.connectService.contactState$.subscribe(state => {
         this.contactState = state;
-        if(state){
-        this.contactIdState.set(state) ;
-        }
+        // if(state){
+        // this.contactIdState.set(state) ;
+        // }
       })
     );
   }

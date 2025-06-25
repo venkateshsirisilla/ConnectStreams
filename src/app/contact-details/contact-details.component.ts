@@ -1,32 +1,42 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { ConnectServiceService } from '../connectService/connect-service.service';
+import { AgentState, ConnectServiceService, ContactState } from '../connectService/connect-service.service';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-contact-details',
-  imports: [],
+  imports: [NgIf],
   templateUrl: './contact-details.component.html',
   styleUrl: './contact-details.component.scss'
 })
 export class ContactDetailsComponent implements OnInit{
+  customers = signal<any[]>([]);
   ccpStreamInstance: any;
-  contactId: WritableSignal<string> = signal('N/A');
+  contactIdState: WritableSignal<ContactState | null> = signal<ContactState | null>(null);
   status: WritableSignal<string> = signal('Initializing...');
+  agentState: AgentState | null = null;
+  contactState: ContactState | null = null;
+   private subscriptions: Subscription[] = [];
 
-   constructor(private connectService: ConnectServiceService) {
 
-   }
+  constructor(private http: HttpClient,private connectService: ConnectServiceService) {
+    
+
+  }
+
+
   ngOnInit(): void {
-    window.connect.agent((agent: any) => {
-      console.log('Agent initialized:', agent);
-      
-    });
-    window.connect.contact((contact:any)=> {
-      console.log('New contact:', contact);
-      
-      contact.onConnecting(() => console.log('Contact connecting'));
-      contact.onAccepted(() => console.log('Contact accepted'));
-      contact.onEnded(() => console.log('Contact ended'));
-    });
+
+
+    this.subscriptions.push(
+      this.connectService.agentState$.subscribe(state => {
+        this.agentState = state;
+      }),
+      this.connectService.contactState$.subscribe(state => {
+        this.contactState = state;
+      })
+    );
   }
 
 }

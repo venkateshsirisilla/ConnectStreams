@@ -1,9 +1,10 @@
 <div class="workspace-container">
   <div class="left-panel" >
-    <app-ccp-container *ngIf="showLeft" (loaded)="onLeftLoaded()"></app-ccp-container>
+    <ng-template #leftHost></ng-template>
+
   </div>
   <div class="right-panel" >
-    <app-customer-cards *ngIf="showRight"></app-customer-cards>
+    <ng-template #rightHost></ng-template>
     
   </div>
   <!-- <div class="right-panel">
