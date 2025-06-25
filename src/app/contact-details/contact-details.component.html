@@ -1,11 +1,22 @@
 <div class="info-panel" style="margin-top: 20px;">
     <h3>Current Contact</h3>
-  <p *ngIf="contactState!=null; else noContact">
-    Contact ID: {{ contactState.contactId }}<br />
-    State: {{ contactState.state }}<br />
-    Type: {{ contactState.type }}
-  </p>
-  <ng-template #noContact>
-    <p>No active contact</p>
-  </ng-template>
+    <p *ngIf="contactState!=null; else noContact">
+        Contact ID: {{ contactState.contactId }}<br />
+        State: {{ contactState.state }}<br />
+        Type: {{ contactState.type }}
+    </p>
+    <ng-template #noContact>
+        <p>No active contact</p>
+    </ng-template>
+</div>
+<div class="info-panel" style="margin-top: 50px;">
+    <div *ngIf="loading">Loading posts...</div>
+    <div *ngIf="error">{{ error }}</div>
+
+    <ul *ngIf="contactState!=null && posts.length">
+        <li *ngFor="let post of posts">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.body }}</p>
+        </li>
+    </ul>
 </div>

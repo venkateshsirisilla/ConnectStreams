@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgFor, NgIf } from '@angular/common';
+import {  NgIf } from '@angular/common';
 import { CcpContainerComponent } from '../ccp-container/ccp-container.component';
 import { AgentState, ConnectServiceService, ContactState } from '../connectService/connect-service.service';
 import { Subscription } from 'rxjs';
@@ -9,7 +9,7 @@ import { ContactDetailsComponent } from '../contact-details/contact-details.comp
 @Component({
   selector: 'app-customer-cards',
   standalone: true,
-  imports: [NgFor,NgIf,ContactDetailsComponent],
+  imports: [NgIf,ContactDetailsComponent],
   templateUrl: './customer-cards.component.html',
   styleUrls: ['./customer-cards.component.scss']
 })
